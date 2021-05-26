@@ -125,7 +125,7 @@ namespace ariel {
                             q_print.pop();
                         }                            
                         
-                        else {
+                        else { // postorder
                             nodeStack.push(p_node); 
                             while (!nodeStack.empty()){
                                 Node* tmp = nodeStack.top();
@@ -154,27 +154,27 @@ namespace ariel {
 
                 // ++i;
                 iterator& operator++() {
-                    if(!nodeStack.empty() || !q_print.empty() || !s_print.empty()){
+                    if (!nodeStack.empty() || !q_print.empty() || !s_print.empty()){
 
-                        if(orderof == 0){ // preorder
+                        if (orderof == 0){ // preorder
                             p_node = nodeStack.top();
                             nodeStack.pop();
-                            if(p_node->right != nullptr){
+                            if (p_node->right != nullptr) {
                                 nodeStack.push(p_node->right);
                             }
-                            if(p_node->left != nullptr){
+                            if (p_node->left != nullptr) {
                                 nodeStack.push(p_node->left);
                             }
                             return *this;
                         }
 
-                        else if(orderof == 1){ // inorder
+                        if (orderof == 1) { // inorder
                             p_node = q_print.front();
                             q_print.pop();
                             return *this;
                         }
 
-                        else {
+                        if (orderof == 2) { // postorder
                             p_node = s_print.top();
                             s_print.pop();
                             return *this;
@@ -186,29 +186,29 @@ namespace ariel {
                 }
                     
                 // i++;
-                const iterator operator++(int) {
+                iterator operator++(int) {
                     iterator tmp = *this;
-                        if(!nodeStack.empty() || !q_print.empty() || !s_print.empty()){
+                        if (!nodeStack.empty() || !q_print.empty() || !s_print.empty()){
 
-                        if(orderof == 0){ // preorder
+                        if(orderof == 0) { // preorder
                             p_node = nodeStack.top();
                             nodeStack.pop();
-                            if(p_node->right != nullptr){
+                            if (p_node->right != nullptr){
                                 nodeStack.push(p_node->right);
                             }
-                            if(p_node->left != nullptr){
+                            if (p_node->left != nullptr){
                                 nodeStack.push(p_node->left);
                             }
                             return tmp;
                         }
 
-                        else if(orderof == 1){ // inorder
+                        if (orderof == 1) { // inorder
                             p_node = q_print.front();
                             q_print.pop();
                             return tmp;
                         }
 
-                        else {
+                        if (orderof == 2) { // postorder
                             p_node = s_print.top();
                             s_print.pop();
                             return tmp;
@@ -261,8 +261,9 @@ namespace ariel {
             }
 
             friend std::ostream& operator<< (std::ostream& os, const BinaryTree<T>& b) {
-                if (b.root == NULL)
+                if (b.root == NULL) {
                     return os;
+                }
  
                 stack<Node*> nodeStack;
                 nodeStack.push(b.root);
@@ -272,10 +273,12 @@ namespace ariel {
                     os << node->data << " ";
                     nodeStack.pop();
             
-                    if (node->right)
+                    if (node->right) {
                         nodeStack.push(node->right);
-                    if (node->left)
+                    }
+                    if (node->left) {
                         nodeStack.push(node->left);
+                    }
                 }
 
                 return os;
