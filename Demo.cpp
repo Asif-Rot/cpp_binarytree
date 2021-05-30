@@ -15,7 +15,9 @@ using namespace std;
 using namespace ariel;
 
 int main() {
+  cout << "here" << endl;
   BinaryTree<int> tree_of_ints;
+  cout << "here1" << endl;
   tree_of_ints.add_root(1)
   .add_left(1, 9)      // Now 9 is the left child of 1
   .add_left(9, 4)      // Now 4 is the left child of 9

@@ -37,6 +37,12 @@ TEST_CASE("Good BinaryTree code") {
     }
 
     i = 0;
+    for (auto it=b_string.begin_preorder(); it!=b_string.end_preorder(); it++) {
+        CHECK((*it) == preorderArr[i]);
+        i++;
+    }
+
+    i = 0;
     for (auto it=b_string.begin_inorder(); it!=b_string.end_inorder(); ++it) {
         CHECK((*it) == inorderArr[i]);
         i++;
